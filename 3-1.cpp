@@ -1,11 +1,11 @@
-﻿#include <iostream>
+﻿#include <iostream> //Напишите игру в кости между человеком и компьютером. Они по очереди кидают по два кубика. Побеждает тот у кого сумма больше. Игра заканчивается если набрана сумма >50. Кубики рисуйте в отдельной ф-ции псевдографикой.
 #include <time.h>
 using std::cout; using std::cin;
-void randomvalue(int&first, int&second) {
+void randomvalue(int&first, int&second) { //получение случайных значений для первого и второго кубика
 	first = rand() % 6 + 1;
 	second = rand() % 6 + 1;
 }
-void printresult(int value) {
+void printresult(int value) { //вывод костей псевдографикой
 	switch (value)
 	{
 	case 1:
@@ -52,15 +52,15 @@ void printresult(int value) {
 		break;
 	}
 }
-void sump(int first, int second, int&sumplayer) {
+void sump(int first, int second, int&sumplayer) { //подсчет суммы для игрока
 	sumplayer = sumplayer + second + first;
 	cout << "У тебя выпало:" << first + second << "\n\n";
 }
-void sumc(int first, int second, int&sumcomp) {
+void sumc(int first, int second, int&sumcomp) { //подсчет суммы для компьютера
 	sumcomp = sumcomp + second + first;
 	cout << "У компьютера выпало:" << first + second << "\n\n";
 }
-int main()
+int main() //Напишите игру в кости между человеком и компьютером. Они по очереди кидают по два кубика. Побеждает тот у кого сумма больше. Игра заканчивается если набрана сумма >50. Кубики рисуйте в отдельной ф-ции псевдографикой.
 {
 	int first = 0, second = 0, sumplayer = 0, sumcomp = 0;
 	setlocale(LC_ALL, "Russian");
