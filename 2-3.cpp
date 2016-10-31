@@ -2,15 +2,17 @@
 #include<clocale>
 #include<time.h>
 using std::cout; using std::cin;
-void fillarray(int a[], int N) { //заполнение массива числами из промежутка (-N,N)
-	int i = 0;
-	int min = -N, max = N;
+void fillarray(float a[], int N) { //заполнение массива числами из промежутка (-N,N)
+	int i = 0, min = -N, max = N;
+	float q, q1;
 	while (i<N) {
-		a[i] = rand() % (max + 1 - min) + min;
+		q = rand() % (max + 1 - min) + min;
+		q1 = rand() % (max + 1 - min) + min;
+		if (q1 != 0) a[i] = 1 + (q / q1); else a[i] = 1 + (q1 / q);
 		i++;
 	}
 }
-void printarray(int a[], int N) { //вывод массива размером N символов
+void printarray(float a[], int N) { //вывод массива размером N символов
 	int i = 0;
 	while (i < N) {
 		cout << a[i] << " ";
@@ -18,7 +20,7 @@ void printarray(int a[], int N) { //вывод массива размером N
 	}
 	cout << "\n";
 }
-void shiftarrayright(int a[],int b[], int N, int k) { //сдвигаем массив на k элементов вправо
+void shiftarrayright(float a[], float b[], int N, int k) { //сдвигаем массив на k элементов вправо
 	int i = 0;
 	while (i < N) {
 		if (i + k < N) b[i + k] = a[i];
@@ -26,12 +28,12 @@ void shiftarrayright(int a[],int b[], int N, int k) { //сдвигаем мас�
 		i++;
 	}
 }
-void shiftarrayleft(int a[],int b[], int N, int k) { //сдвигаем массив на k элементов влево
+void shiftarrayleft(float a[], float b[], int N, int k) { //сдвигаем массив на k элементов влево
 	int i;
 	i = 0;
 	while (i <N) {
-		if (i-k >= 0) b[i-k] = a[i];
-		else b[i-k+N] = a[i];
+		if (i - k >= 0) b[i - k] = a[i];
+		else b[i - k + N] = a[i];
 		i++;
 	}
 }
@@ -40,18 +42,18 @@ int main()
 	srand(time(0));
 	setlocale(LC_ALL, "russian");
 	const int N = 10;
-	int a[N], b[N], k;
+	float a[N], b[N], k;
 	cout << "Введите на сколько сдвинуть массив\n";
 	cin >> k;
 	fillarray(a, N);
 	cout << "Исходный массив: ";
 	printarray(a, N);
 	cout << "\n\n";
-	shiftarrayright(a,b, N, k);
+	shiftarrayright(a, b, N, k);
 	cout << "Массив сдвинутый вправо на " << k << " позиций: ";
 	printarray(b, N);
 	cout << "\n\n";
-	shiftarrayleft(b,a, N, k);
+	shiftarrayleft(b, a, N, k);
 	cout << "Массив сдвинутый влево на " << k << " позиций: ";
 	printarray(a, N);
 	cout << "\n\n";

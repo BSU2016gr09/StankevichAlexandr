@@ -5,26 +5,26 @@ using std::cout; using std::cin; using std::swap;
 void shuffleelem(int a[], int b[], int N) {
 	int k, i = 0;
 	while (i < N) {
-		k = rand() % (N-1);
+		k = rand() % (N - 1);
 		b[i] = a[k];
 		k = 0;
 		i++;
 	}
 }
-void shuffleelements(int a[],int N) { //перетусовка элементов массива меня случайные элементы
-	int i=0, b,c;
-	while (i < N*N) { 
-		b = rand() % (N-1);
-		c = rand() % (N-1);
+void shuffleelements(int a[], int N) { //перетусовка элементов массива меняя местами случайные элементы
+	int i = 0, b, c;
+	while (i < N*N) {
+		b = rand() % (N - 1);
+		c = rand() % (N - 1);
 		swap(a[c], a[b]);
 		i++;
 	}
 }
-void fillarray(int a[], int N) { //заполнение массива числами из промежутка (1,N)
+void fillarray(int a[], int N) { //заполнение массива последовательными числами из промежутка (1,N);
 	int i = 0;
-	int min = 1, max = N;
+	a[0] = 1;
 	while (i<N) {
-		a[i] = rand() % (max + 1 - min) + min;
+		a[i + 1] = a[i] + 1;
 		i++;
 	}
 }

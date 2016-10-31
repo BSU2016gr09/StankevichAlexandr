@@ -2,7 +2,7 @@
 #include<clocale>
 #include<time.h>
 using std::cout; using std::cin; using std::swap;
-void printarray(int a[], int N) { //вывод массива размером N символов
+void printarray(float a[], int N) { //вывод массива размером N символов
 	int i = 0;
 	while (i < N) {
 		cout << a[i] << " ";
@@ -10,17 +10,20 @@ void printarray(int a[], int N) { //вывод массива размером N
 	}
 	cout << "\n";
 }
-void rollarray(int a[], int N) { //"переворачиваем" массив.
+void rollarray(float a[], int N) { //"переворачиваем" массив.
 	int i = 0;
-	while (i < N / 2) { //для N нечетных просто изменяется условие такое-же:)
+	while (i < N / 2) { //для N нечетных условие такое-же:)
 		swap(a[i], a[N - 1 - i]);
 		i++;
 	}
 }
-void fillarray(int N, int a[]) { //заполнение массива случайными числами из промежутка (1,N)
+void fillarray(int N, float a[]) { //заполнение массива случайными числами из промежутка (1,N)
 	int i = 0;
+	float q, q1;
 	while (i<N) {
-		a[i] = rand() % (N + 1);
+		q = (rand() % N + 1);
+		q1 = (rand() % N);
+		if (q1 != 0) a[i] = 1 + (q / q1); else a[i] = 1+(q1 / q);
 		i++;
 	}
 }
@@ -29,7 +32,7 @@ int main()
 	srand(time(0));
 	setlocale(LC_ALL, "russian");
 	const int N = 9;
-	int a[N];
+	float a[N];
 	fillarray(N, a);
 	cout << "Массив: ";
 	printarray(a, N);

@@ -2,7 +2,7 @@
 #include<clocale>
 #include<time.h>
 using std::cout; using std::cin; using std::swap;
-void printarray(int a[], int N) { //вывод массива размером n символом
+void printarray(float a[], int N) { //вывод массива размером n символом
 	int i = 0;
 	while (i < N) {
 		cout << a[i] << " ";
@@ -10,15 +10,17 @@ void printarray(int a[], int N) { //вывод массива размером n
 	}
 	cout << "\n";
 }
-void fillarray(int a[], int N) { //заполнение массива числами из промежутка (-N,N)
-	int i = 0;
-	int min = -N, max = N;
+void fillarray(float a[], int N) { //заполнение массива числами из промежутка (-N,N)
+	int i = 0, min = -N, max = N;
+	float q, q1;
 	while (i<N) {
-		a[i] = rand() % (max + 1 - min) + min;
+		q = rand() % (max + 1 - min) + min;
+		q1 = rand() % (max + 1 - min) + min;
+		if (q1 != 0) a[i] = (q / q1); else a[i] = (q1 / q);
 		i++;
 	}
 }
-void shiftarrayright(int a[], int N) { //сдвиг массива вправо на один элемент
+void shiftarrayright(float a[], int N) { //сдвиг массива вправо на один элемент
 	int k, i = 1;
 	k = a[N - 1];
 	i = N - 1;
@@ -28,10 +30,10 @@ void shiftarrayright(int a[], int N) { //сдвиг массива вправо 
 	}
 	a[0] = k;
 }
-void shiftarrayleft(int a[], int N) { //сдвиг массива влево на один элемент
-	int k, i = 1;
+void shiftarrayleft(float a[], int N) { //сдвиг массива влево на один элемент
+	int k, i = 0;
 	k = a[0];
-	while (i <N - 1) {
+	while (i <N) {
 		a[i] = a[i + 1];
 		i++;
 	}
@@ -42,7 +44,7 @@ int main()
 	srand(time(0));
 	setlocale(LC_ALL, "russian");
 	const int N = 10;
-	int a[N];
+	float a[N];
 	fillarray(a, N);
 	cout << "Исходный массив: ";
 	printarray(a, N);
