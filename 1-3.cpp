@@ -63,5 +63,6 @@ int main(){ //Положительные элементы массива А(N) �
 	positiveSort(Array, N);
 	printArray(Array, N);
 	sortNegatives(Array, N);
+	delete[] Array;
 	system("pause");
 }

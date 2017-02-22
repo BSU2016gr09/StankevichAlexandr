@@ -48,6 +48,7 @@ void sortPoints(int* distances, int* oX, int* oY,int N){ //функция сор
 
 int main(){ //Даны точки плоскости своими координатами в виде двух одномерных массивов. Точки плоскости рассортировать по возрастанию расстояния до прямой ax + by + c = 0.
 	setlocale(LC_ALL, "Russian");
+	srand(time(0));
 	int a, b, c, N;
 	cout << "Количество точек:";
 	cin >> N;
