@@ -3,6 +3,15 @@
 #include<ctime>
 using namespace std;
 
+void giveMemory(float* &arr, int N){
+	try{
+		arr = new float[N];
+	}
+	catch (...){
+		cout << "Not enough memory!!";
+	}
+}
+
 void initArray(float* arr, int N){ //функция инициализации массива случайными числами
 	int j = 0;
 	while (j < N){
@@ -11,11 +20,11 @@ void initArray(float* arr, int N){ //функция инициализации �
 }
 
 void positiveSort(float* a, int N){ //положительные элементы массива А(N) переставить в конец массива, сохраняя порядок следования. 
-	int i = N - 1,j;
-	while(i >= 0){
+	int i = N - 1, j;
+	while (i >= 0){
 		if (*(a + i) > 0){
 			j = i;
-			while(j < N - 1){
+			while (j < N - 1){
 				swap(*(a + j), *(a + j + 1));
 				j++;
 			}
@@ -57,7 +66,8 @@ int main(){ //Положительные элементы массива А(N) �
 	srand(time(0));
 	int N;
 	cin >> N;
-	float*Array = new float[N];
+	float*Array;
+	giveMemory(Array, N);
 	inputArray(Array, N);
 	printArray(Array, N);
 	positiveSort(Array, N);

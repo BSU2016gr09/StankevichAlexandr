@@ -1,50 +1,60 @@
-п»ї#include<iostream>
+#include<iostream>
 #include<ctime>
-using namespace std; //Р Р°СЃРїРѕР»РѕР¶РёС‚СЊ РІ РїРѕСЂСЏРґРєРµ РІРѕР·СЂР°СЃС‚Р°РЅРёСЏ СЌР»РµРјРµРЅС‚С‹ РјР°СЃСЃРёРІР° Рђ(N), РЅР°С‡РёРЅР°СЏ СЃ k-РіРѕ СЌР»РµРјРµРЅС‚Р°.
+using namespace std; //Расположить в порядке возрастания элементы массива А(N), начиная с k-го элемента.
 
-void initArray(int* arr, int N){ //С„СѓРЅРєС†РёСЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё РјР°СЃСЃРёРІР° СЃР»СѓС‡Р°Р№РЅС‹РјРё С‡РёСЃР»Р°РјРё
+void initArray(int* arr, int N){ //функция инициализации массива случайными числами
 	int j = 0;
 	while (j < N){
-		arr[j++] = rand()%N;
+		arr[j++] = rand() % N;
 	}
 }
 
-void inputArray(int* arr, int N){ //С„СѓРЅРєС†РёСЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё РјР°СЃСЃРёРІР° СЃ РєР»Р°РІРёР°С‚СѓСЂС‹
+void inputArray(int* arr, int N){ //функция инициализации массива с клавиатуры
 	int j = 0;
 	while (j < N){
 		cin >> arr[j++];
 	}
 }
 
-void printArray(int* arr, int N){ //С„СѓРЅРєС†РёСЏ РІС‹РІРѕРґР° РјР°СЃСЃРёРІР° РЅР° РєРѕРЅСЃРѕР»СЊ
+void printArray(int* arr, int N){ //функция вывода массива на консоль
 	int j = 0;
 	while (j < N){
 		cout << arr[j++] << " ";
 	}
 }
 
-void sortArray(int*arr, int N, int k){ //СЃРѕСЂС‚РёСЂРѕРІРєР° РјР°СЃСЃРёРІР° "РїСѓР·С‹СЂСЊРєРѕРј" РЅР°С‡РёРЅР°СЏ СЃ k-РіРѕ СЌР»РµРјРµРЅС‚Р°
-int i = k-1;
-while (i < N - 1){
-	int j = k-1;
-	while (j < N - 1){
-		if (arr[j] > arr[j + 1]) swap(arr[j], arr[j + 1]);
-		j++;
+void sortArray(int*arr, int N, int k){ //сортировка массива "пузырьком" начиная с k-го элемента
+	int i = k - 1;
+	while (i < N - 1){
+		int j = k - 1;
+		while (j < N - 1){
+			if (arr[j] > arr[j + 1]) swap(arr[j], arr[j + 1]);
+			j++;
 		}
-	i++;
+		i++;
 	}
 }
 
-int main(){ //Р Р°СЃРїРѕР»РѕР¶РёС‚СЊ РІ РїРѕСЂСЏРґРєРµ РІРѕР·СЂР°СЃС‚Р°РЅРёСЏ СЌР»РµРјРµРЅС‚С‹ РјР°СЃСЃРёРІР° Рђ(N), РЅР°С‡РёРЅР°СЏ СЃ k-РіРѕ СЌР»РµРјРµРЅС‚Р°.
+void giveMemory(int* &arr, int N){
+	try{
+		arr = new int[N];
+	}
+	catch(...){
+		cout << "Not enough memory";
+	}
+}
+
+int main(){ //Расположить в порядке возрастания элементы массива А(N), начиная с k-го элемента.
 	srand(time(0));
-	int N,k;
+	int N, k;
 	cin >> N;
-	int* Array = new int[N];
+	int* Array;
+	giveMemory(Array, N);
 	initArray(Array, N);
 	printArray(Array, N);
 	cout << "\n\n\n";
 	cin >> k;
-	sortArray(Array, N,k);
+	sortArray(Array, N, k);
 	printArray(Array, N);
 	delete[] Array;
 	cout << "\n\n\n";
