@@ -10,9 +10,9 @@ using namespace std;
 //}
 
 int** giveMemory(int N){
-	int** arr = new int*[N];
+	int** arr = new int*[N];//где проверка?????
 	for (int i = 0; i != N; i++)
-		arr[i] = new int[N];
+		arr[i] = new int[N]; //где проверка?????
 	return arr;
 }
 
@@ -29,9 +29,9 @@ void printArray(int** arr, int N) //функция вывода массива �
 }
 
 void swapTwoRows(int**&arr,int i,int N){ //функция замены местами данной строки и последней
-	int j = 0;
+	int j = 0; 
 		while (j != N){
-			swap(arr[i][j], arr[N-1][j]);
+			swap(arr[i][j], arr[N-1][j]);  //Отвратительно!!!!!! Не понял для чего указатели!!!!!!!!!!!!
 			j++;
 		}
 }
