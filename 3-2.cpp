@@ -42,11 +42,11 @@ void printArray(int** arr, int N) //функция вывода массива �
 	fout << endl;
 }
 
-void swapTwoRows(int**&arr, int i, int N){ //функция замены местами данной строки и последней
-		swap(arr[i], arr[N - 1]);
+void swapTwoRows(int** arr, int i, int N){ //функция замены местами данной строки и последней
+	swap(arr[i], arr[N - 1]);
 }
 
-void firstRowWithoutNegative(int**&arr, int N){ //функция поиска первой строки не содержащей отрицательных элементов
+void firstRowWithoutNegative(int** arr, int N){ //функция поиска первой строки не содержащей отрицательных элементов
 	int c = 0, i = 0, j = 0;
 	for (int i = 0; i != N; i++) {
 		for (int j = 0; j != N; j++) {
@@ -60,11 +60,11 @@ void firstRowWithoutNegative(int**&arr, int N){ //функция поиска п
 	}
 }
 
-void initRandArray(int** arr, int N) //функция инициализации массива случайными числами
+void initRandArray(int**&arr, int N) //функция инициализации массива случайными числами
 {
 	for (int i = 0; i != N; i++)
 		for (int j = 0; j != N; j++)
-			arr[i][j] = rand() %(13)-2;
+			arr[i][j] = rand() % (13) - 2;
 	fout << endl;
 }
 
@@ -77,18 +77,25 @@ void initArray(int**&arr, int N) { //функция инициализации �
 	fout << endl;
 }
 
+void deleteMem(int**&arr, int N){
+	for (int i = 0; i != N; i++){
+		delete[]arr[i];
+	}
+	delete[]arr;
+}
+
 void main() //В массиве A[N][N] найти первую строку, не содержащую отрицательных элементов, и поменять ее с последней строкой.
 {
 	int N;
 	int **Array;
 	cin >> N;
 	srand(time(0));
-	give_memory(Array,N);
+	give_memory(Array, N);
 	initRandArray(Array, N);
 	printArray(Array, N);
 	firstRowWithoutNegative(Array, N);
 	printArray(Array, N);
-	delete[] Array;
+	deleteMem(Array, N);
 	system("pause");
 	fout.close();
 }
