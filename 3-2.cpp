@@ -1,83 +1,94 @@
-п»ї#include <iostream> //Р’ РјР°СЃСЃРёРІРµ A[N][N] РЅР°Р№С‚Рё РїРµСЂРІСѓСЋ СЃС‚СЂРѕРєСѓ, РЅРµ СЃРѕРґРµСЂР¶Р°С‰СѓСЋ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ, Рё РїРѕРјРµРЅСЏС‚СЊ РµРµ СЃ РїРѕСЃР»РµРґРЅРµР№ СЃС‚СЂРѕРєРѕР№. 
-#include<ctime> 
+#include <iostream> //В массиве A[N][N] найти первую строку, не содержащую отрицательных элементов, и поменять ее с последней строкой. 
+#include <ctime> 
+#include <fstream>
 using namespace std;
 
-//void give_memory(int**&arr, int N) //С„СѓРЅРєС†РёСЏ РІС‹РґРµР»РµРЅРёСЏ РїР°РјСЏС‚Рё РґР»СЏ РґРІСѓРјРµСЂРЅРѕРіРѕ РјР°СЃСЃРёРІР°
-//{
-//	arr = new int*[N];
-//	for (int i = 0; i != N; i++)
-//		arr[i] = new int[N];
-//}
-
-int** giveMemory(int N){
-	int** arr = new int*[N];//РіРґРµ РїСЂРѕРІРµСЂРєР°?????
-	for (int i = 0; i != N; i++)
-		arr[i] = new int[N]; //РіРґРµ РїСЂРѕРІРµСЂРєР°?????
-	return arr;
+void give_memory(int**&arr, int N) //функция выделения памяти для двумерного массива
+{
+	try{
+		arr = new int*[N];
+		for (int i = 0; i != N; i++)
+			arr[i] = new int[N];
+	}
+	catch (...){
+		cout << "Not enough memory!!!";
+	}
 }
 
-void printArray(int** arr, int N) //С„СѓРЅРєС†РёСЏ РІС‹РІРѕРґР° РјР°СЃСЃРёРІР° РЅР° РєРѕРЅСЃРѕР»СЊ
+ofstream fout("result.txt");
+//ifstream fin(in.txt);
+
+//int** giveMemory(int N){
+//	try{
+//		int** arr = new int*[N];
+//		for (int i = 0; i != N; i++)
+//			arr[i] = new int[N];
+//	}
+//	catch (...){
+//		cout << "Not enough memory!!";
+//	}
+//	return arr;
+//}
+
+void printArray(int** arr, int N) //функция вывода массива на консоль
 {
 	for (int i = 0; i != N; i++) {
 		for (int j = 0; j != N; j++) {
-			cout.width(3);
-			cout << arr[i][j];
+			fout.width(3);
+			fout << arr[i][j];
 		}
-		cout << endl;
+		fout << endl;
 	}
-	cout << endl;
+	fout << endl;
 }
 
-void swapTwoRows(int**&arr,int i,int N){ //С„СѓРЅРєС†РёСЏ Р·Р°РјРµРЅС‹ РјРµСЃС‚Р°РјРё РґР°РЅРЅРѕР№ СЃС‚СЂРѕРєРё Рё РїРѕСЃР»РµРґРЅРµР№
-	int j = 0; 
-		while (j != N){
-			swap(arr[i][j], arr[N-1][j]);  //РћС‚РІСЂР°С‚РёС‚РµР»СЊРЅРѕ!!!!!! РќРµ РїРѕРЅСЏР» РґР»СЏ С‡РµРіРѕ СѓРєР°Р·Р°С‚РµР»Рё!!!!!!!!!!!!
-			j++;
-		}
+void swapTwoRows(int**&arr, int i, int N){ //функция замены местами данной строки и последней
+		swap(arr[i], arr[N - 1]);
 }
 
-void firstRowWithoutNegative(int**&arr, int N){ //С„СѓРЅРєС†РёСЏ РїРѕРёСЃРєР° РїРµСЂРІРѕР№ СЃС‚СЂРѕРєРё РЅРµ СЃРѕРґРµСЂР¶Р°С‰РµР№ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ
+void firstRowWithoutNegative(int**&arr, int N){ //функция поиска первой строки не содержащей отрицательных элементов
 	int c = 0, i = 0, j = 0;
 	for (int i = 0; i != N; i++) {
 		for (int j = 0; j != N; j++) {
 			if (arr[i][j] < 0) c++;
 		}
 		if (c == 0) {
-			swapTwoRows(arr, i,N);
+			swapTwoRows(arr, i, N);
 			break;
 		}
 		c = 0;
 	}
 }
 
-void initRandArray(int** arr, int N) //С„СѓРЅРєС†РёСЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё РјР°СЃСЃРёРІР° СЃР»СѓС‡Р°Р№РЅС‹РјРё С‡РёСЃР»Р°РјРё
+void initRandArray(int** arr, int N) //функция инициализации массива случайными числами
 {
 	for (int i = 0; i != N; i++)
 		for (int j = 0; j != N; j++)
-			arr[i][j] = rand() % 100;
-	cout << endl;
+			arr[i][j] = rand() %(13)-2;
+	fout << endl;
 }
 
-void initArray(int**&arr, int N) { //С„СѓРЅРєС†РёСЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё РјР°СЃСЃРёРІР° СЃ РєР»Р°РІРёР°С‚СѓСЂС‹
+void initArray(int**&arr, int N) { //функция инициализации массива с клавиатуры
 	for (int i = 0; i != N; i++) {
 		for (int j = 0; j != N; j++) {
 			cin >> arr[i][j];
 		}
 	}
-	cout << endl;
+	fout << endl;
 }
 
-void main() //Р’ РјР°СЃСЃРёРІРµ A[N][N] РЅР°Р№С‚Рё РїРµСЂРІСѓСЋ СЃС‚СЂРѕРєСѓ, РЅРµ СЃРѕРґРµСЂР¶Р°С‰СѓСЋ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ, Рё РїРѕРјРµРЅСЏС‚СЊ РµРµ СЃ РїРѕСЃР»РµРґРЅРµР№ СЃС‚СЂРѕРєРѕР№.
+void main() //В массиве A[N][N] найти первую строку, не содержащую отрицательных элементов, и поменять ее с последней строкой.
 {
 	int N;
-	
+	int **Array;
 	cin >> N;
-	int **Array = giveMemory(N);
+	srand(time(0));
+	give_memory(Array,N);
 	initRandArray(Array, N);
 	printArray(Array, N);
 	firstRowWithoutNegative(Array, N);
 	printArray(Array, N);
 	delete[] Array;
-	srand(time(0));
 	system("pause");
+	fout.close();
 }
