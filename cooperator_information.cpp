@@ -2,7 +2,7 @@
 //Составить функции:
 //1.определение сотрудника с максимальной з/п
 //2.сортировка сотрудников по возрасту
-//3.определение средне з/п сотрудника???? у нас же есть просто з/п, как можно вычислить среднюю?
+//3.определение средне з/п сотрудника???? у нас же есть просто з/п, как можно вычислить среднюю? СРЕДНЯЯ в коллективе. В массиве, который состоит из сотрудников!!!!
 
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -62,8 +62,8 @@ public:
 		this->salary = 0;
 		this->tableNumber = 0;
 		this->bornYear = 0;
-		giveMemory(this->surname, 20);
-		strcpy(this->surname,obj.surname);
+		giveMemory(this->surname, 20);//почему 20????
+		strcpy(this->surname,obj.surname);//Опасно, вдруг obj.surname>20
 		this->salary = obj.salary;
 		this->tableNumber = obj.tableNumber;
 		this->bornYear = obj.bornYear;
@@ -126,7 +126,7 @@ istream& operator>>(istream& input, CooperatorInf& coop)	//перегрузка 
 }
 
 CooperatorInf maxSalaryCoop(CooperatorInf*cooperators,int N){ //функция определения сотрудника с максимальной заработной платой
-	int sort = cooperators[0].salary, i = 0;
+	int sort = cooperators[0].salary, i = 0;//шикрное имя переменной для максимального значения. Просто - песня!!!
 	while (i < N){
 		if (cooperators[i].salary > sort) sort = cooperators[i].salary;
 		i++;
